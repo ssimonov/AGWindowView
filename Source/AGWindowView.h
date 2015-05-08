@@ -25,6 +25,7 @@
 #import <UIKit/UIKit.h>
 #import "AGWindowViewDefines.h"
 
+
 /**
  * @class AGWindowView
  * @description A view which is added to a UIWindow. It will automatically fill window and rotate along with statusbar rotations.
@@ -46,7 +47,7 @@
 - (id)initAndAddToKeyWindow;
 
 - (void)addSubViewAndKeepSamePosition:(UIView *)view;
-- (void)addSubviewAndFillBounds:(UIView *)view;
+- (void)addSubviewAndFillBounds:(UIView *)view completion:(void (^)(BOOL finished))completion;
 - (void)addSubviewAndFillBounds:(UIView *)view withSlideUpAnimationOnDone:(void(^)(void))onDone;
 - (void)fadeOutAndRemoveFromSuperview:(void(^)(void))onDone;
 - (void)slideDownSubviewsAndRemoveFromSuperview:(void(^)(void))onDone;

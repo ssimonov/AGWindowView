@@ -24,6 +24,7 @@
 #import "AGWindowView.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 static NSMutableArray *_activeWindowViews;
 
 @interface AGWindowView ()
@@ -326,10 +327,17 @@ static BOOL IS_IOS_8_OR_HIGHER()
     [self addSubview:view];
 }
 
-- (void)addSubviewAndFillBounds:(UIView *)view
+- (void)addSubviewAndFillBounds:(UIView *)view completion:(void (^)(BOOL finished))completion
 {
     view.frame = [self bounds];
     [self addSubview:view];
+    
+    self.alpha = 0.0f;
+    [UIView animateWithDuration:0.4f animations:^{
+        self.alpha = 1.0f;
+        self.opaque = YES;
+    }
+                     completion:completion];
 }
 
 - (void)addSubviewAndFillBounds:(UIView *)view withSlideUpAnimationOnDone:(void(^)(void))onDone
@@ -341,7 +349,7 @@ static BOOL IS_IOS_8_OR_HIGHER()
     view.frame = startFrame;
     [self addSubview:view];
     
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:0.4f animations:^{
         view.frame = endFrame;
         self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
         self.opaque = YES;
