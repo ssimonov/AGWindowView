@@ -327,6 +327,12 @@ static BOOL IS_IOS_8_OR_HIGHER()
     [self addSubview:view];
 }
 
+- (void)addSubviewAndFillBounds:(UIView *)view
+{
+    view.frame = [self bounds];
+    [self addSubview:view];
+}
+
 - (void)addSubviewAndFillBounds:(UIView *)view completion:(void (^)(BOOL finished))completion
 {
     view.frame = [self bounds];
